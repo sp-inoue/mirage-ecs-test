@@ -1,0 +1,36 @@
+host:
+  webapi: mirage-ecs-test.event-platform.jp
+  reverse_proxy_suffix: .mirage-ecs-test.event-platform.jp
+
+listen:
+  foreign_address: 0.0.0.0
+  http:
+    - listen: 80
+      target: 80
+
+network:
+  proxy_timeout: 0
+
+htmldir: "s3://mirage-event-platform-jp/html/"
+
+
+parameters:
+  - name: branch
+    env: GIT_BRANCH
+    rule: ""
+    required: true
+  - name: additional
+    env: ADDITIONAL
+    default: "foo"
+    description: "Additional parameter"
+    options:
+      - label: "Foo"
+        value: "foo"
+      - label: "Bar"
+        value: "bar"
+
+#auth:
+#  amzn_oidc:
+#    claim: email
+#    matchers:
+#      - suffix: "@gmail.com"
